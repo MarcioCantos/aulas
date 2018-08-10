@@ -9,6 +9,7 @@ import org.junit.Test;
 import up.edu.br.sistemaacademico.dao.AlunoDao;
 import up.edu.br.sistemaacademico.entidades.Aluno;
 import up.edu.br.sistemaacademico.servico.AlunoServico;
+import up.edu.br.sistemaacademico.servico.Facade;
 import up.edu.br.sistemaacademico.servico.ServicoException;
 
 public class TestarAluno {
@@ -21,7 +22,9 @@ public class TestarAluno {
 		a.setMatricula("12345");
 		
 		try {
-			new AlunoServico().adicionar(a);
+			
+			new Facade().addAluno(a);
+			
 		} catch (ServicoException e) {
 			e.printStackTrace();
 		}
@@ -34,6 +37,38 @@ public class TestarAluno {
 		List<Aluno> alunos = new AlunoDao().listar();
 		
 		assertEquals(true, alunos.size() > 0);
+	}
+	
+	@Test
+	public void deveriaEditarAluno() {
+		Aluno a = new Aluno();
+		a.setId((long) 10);
+		a.setNome("Cleverson");
+		a.setMatricula("12345");
+		
+		try {
+			new Facade().editarAluno(a);
+		} catch (ServicoException e) {
+			e.printStackTrace();
+		}
+		
+		assertEquals(true, a.getId() != null);
+	}
+	
+	public void deveriaDeletarAluno() {
+		Aluno a = new Aluno();
+		a.setId((long) 10);
+		a.setNome("Cleverson");
+		a.setMatricula("12345");
+		
+		try {
+			new Facade().deletarAluno(a);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		assertEquals(true, a.getId() != null);
+		
 	}
 
 }
