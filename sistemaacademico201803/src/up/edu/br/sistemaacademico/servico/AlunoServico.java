@@ -23,7 +23,7 @@ public class AlunoServico {
 		if(aluno.getId() == null) {
 			throw new ServicoException("Aluno inexistente.");
 		}
-		
+		//cadastra aluno
 		alunoDao.editar(aluno);
 		
 	}
